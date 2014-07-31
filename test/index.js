@@ -29,6 +29,15 @@ it('should be able to decode a JPEG', function(t) {
   t.end();
 });
 
+it('should be able to decode a JPEG with RST intervals', function(t) {
+  var jpegData = fixture('redbox-with-rst.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  var expected = fixture('redbox.jpg');
+  var rawExpectedImageData = jpeg.decode(expected);
+  t.deepEqual(rawImageData.data, rawExpectedImageData.data);
+  t.end();
+});
+
 it('should be able to encode a JPEG', function (t) {
   var frameData = fixture('grumpycat.rgba');
   var rawImageData = {
