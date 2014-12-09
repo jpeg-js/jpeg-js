@@ -38,6 +38,17 @@ it('should be able to decode a JPEG with RST intervals', function(t) {
   t.end();
 });
 
+it('should be able to decode a grayscale JPEG', function(t) {
+  var jpegData = fixture('apsara.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  t.equal(rawImageData.width, 580);
+  t.equal(rawImageData.height, 599);
+  var expected = fixture('apsara.rgba');
+  t.deepEqual(rawImageData.data, expected);
+  t.end();
+});
+
+
 it('should be able to encode a JPEG', function (t) {
   var frameData = fixture('grumpycat.rgba');
   var rawImageData = {
