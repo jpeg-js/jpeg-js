@@ -48,6 +48,13 @@ it('should be able to decode a grayscale JPEG', function(t) {
   t.end();
 });
 
+it('should be able to decode a unconventional table JPEG', function (t) {
+  var jpegData = fixture('unconventional-table.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  t.equal(rawImageData.width, 1920);
+  t.equal(rawImageData.height, 1200);
+  t.end();
+});
 
 it('should be able to encode a JPEG', function (t) {
   var frameData = fixture('grumpycat.rgba');
@@ -86,3 +93,4 @@ it('should be able to create a JPEG from an array', function (t) {
   t.bufferEqual(jpegImageData.data, expected);
   t.end();
 });
+
