@@ -48,6 +48,54 @@ it('should be able to decode a grayscale JPEG', function(t) {
   t.end();
 });
 
+it('should be able to decode a CMYK jpeg with correct colors', function (t) {
+  var jpegData = fixture('tree-cmyk.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  t.equal(rawImageData.width, 400);
+  t.equal(rawImageData.height, 250);
+  var expected = fixture('tree-cmyk.cmyk');
+  t.deepEqual(rawImageData.data, expected);
+  t.end();
+});
+
+it('should be able to decode an RGB jpeg with correct colors', function (t) {
+  var jpegData = fixture('tree-rgb.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  t.equal(rawImageData.width, 400);
+  t.equal(rawImageData.height, 250);
+  var expected = fixture('tree-rgb.rgb');
+  t.deepEqual(rawImageData.data, expected);
+  t.end();
+});
+
+it('should be able to decode a greyscale CMYK jpeg with correct colors', function (t) {
+  var jpegData = fixture('cmyk-grey.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  t.equal(rawImageData.width, 300);
+  t.equal(rawImageData.height, 389);
+  var expected = fixture('cmyk-grey.cmyk');
+  t.deepEqual(rawImageData.data, expected);
+  t.end();
+});
+
+it('should be able to decode an adobe CMYK jpeg with correct colors', function (t) {
+  var jpegData = fixture('cmyktest.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  t.equal(rawImageData.width, 300);
+  t.equal(rawImageData.height, 111);
+  var expected = fixture('cmyktest.cmyk');
+  t.deepEqual(rawImageData.data, expected);
+
+  var jpegData2 = fixture('plusshelf-drawing.jpg');
+  var rawImageData2 = jpeg.decode(jpegData2);
+  t.equal(rawImageData2.width, 350);
+  t.equal(rawImageData2.height, 233);
+  var expected2 = fixture('plusshelf-drawing.cmyk');
+  t.deepEqual(rawImageData2.data, expected2);
+
+  t.end();
+});
+
 it('should be able to decode a unconventional table JPEG', function (t) {
   var jpegData = fixture('unconventional-table.jpg');
   var rawImageData = jpeg.decode(jpegData);
