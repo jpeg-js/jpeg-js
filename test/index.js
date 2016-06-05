@@ -142,3 +142,13 @@ it('should be able to create a JPEG from an array', function (t) {
   t.end();
 });
 
+it('should be able to decode a JPEG into a typed array', function(t) {
+  var jpegData = fixture('grumpycat.jpg');
+  var rawImageData = jpeg.decode(jpegData, true);
+  t.equal(rawImageData.width, 320);
+  t.equal(rawImageData.height, 180);
+  var expected = fixture('grumpycat.rgba');
+  t.bufferEqual(rawImageData.data, expected);
+  t.assert(rawImageData.data instanceof Uint8Array, 'data is a typed array');
+  t.end();
+});
