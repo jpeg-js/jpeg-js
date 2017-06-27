@@ -22,7 +22,7 @@ Will decode a buffer or typed array into a `Buffer`;
 var jpeg = require('jpeg-js');
 var jpegData = fs.readFileSync('grumpycat.jpg');
 var rawImageData = jpeg.decode(jpegData);
-console.log(jpegData.data);
+console.log(rawImageData);
 /*
 { width: 320,
   height: 180,
@@ -37,7 +37,7 @@ To decode directly into a `Uint8Array`, pass `true` as the second argument to
 var jpeg = require('jpeg-js');
 var jpegData = fs.readFileSync('grumpycat.jpg');
 var rawImageData = jpeg.decode(jpegData, true); // return as Uint8Array
-console.log(jpegData.data);
+console.log(rawImageData);
 /*
 { width: 320,
   height: 180,
