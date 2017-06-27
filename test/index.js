@@ -104,6 +104,29 @@ it('should be able to decode a unconventional table JPEG', function (t) {
   t.end();
 });
 
+it('should be able to decode a progressive JPEG', function(t) {
+  var jpegData = fixture('skater-progressive.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  t.equal(rawImageData.width, 256);
+  t.equal(rawImageData.height, 256);
+  var expected = fixture('skater-progressive.rgba');
+  t.deepEqual(rawImageData.data, expected);
+  t.end();
+});
+
+it('should be able to decode a progressive JPEG the same as non-progressive', function(t) {
+  var jpegData = fixture('skater.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+
+  var otherJpegData = fixture('skater-progressive.jpg');
+  var otherRawImageData = jpeg.decode(otherJpegData);
+
+  t.equal(rawImageData.width, otherRawImageData.width);
+  t.equal(rawImageData.height, otherRawImageData.height);
+  t.deepEqual(rawImageData.data, otherRawImageData.data);
+  t.end();
+});
+
 it('should be able to encode a JPEG', function (t) {
   var frameData = fixture('grumpycat.rgba');
   var rawImageData = {
