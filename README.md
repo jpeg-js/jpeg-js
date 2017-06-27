@@ -131,3 +131,27 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+## Contributing
+
+jpeg-js is an **OPEN Open Source Project**. This means that:
+
+> Individuals making significant and valuable contributions are given commit-access to the project to contribute as they see fit. This project is more like an open wiki than a standard guarded open source project.
+
+See the [CONTRIBUTING.md](https://github.com/eugeneware/jpeg-js/blob/master/CONTRIBUTING.md) file for more details.
+
+### Contributors
+
+jpeg-js is only possible due to the excellent work of the following contributors:
+
+<table><tbody>
+<tr><th align="left">Adobe</th><td><a href="https://github.com/adobe">GitHub/adobe</a></td></tr>
+<tr><th align="left">Yury Delendik</th><td><a href="https://github.com/notmasteryet/">GitHub/notmasteryet</a></td></tr>
+<tr><th align="left">Eugene Ware</th><td><a href="https://github.com/eugeneware">GitHub/eugeneware</a></td></tr>
+<tr><th align="left">Michael Kelly</th><td><a href="https://github.com/mrkelly">GitHub/mrkelly</a></td></tr>
+<tr><th align="left">Peter Liljenberg</th><td><a href="https://github.com/petli">GitHub/petli</a></td></tr>
+<tr><th align="left">Flandre Scarlet</th><td><a href="https://github.com/XadillaX">GitHub/XadillaX</a></td></tr>
+<tr><th align="left">strandedcity</th><td><a href="https://github.com/strandedcity">GitHub/strandedcity</a></td></tr>
+<tr><th align="left">wmossman</th><td><a href="https://github.com/wmossman">GitHub/wmossman</a></td></tr>
+<tr><th align="left">Patrick Hulce</th><td><a href="https://github.com/patrickhulce">GitHub/patrickhulce</a></td></tr>
+</tbody></table>
