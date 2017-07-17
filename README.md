@@ -152,7 +152,7 @@ jpeg-js is only possible due to the excellent work of the following contributors
 <tr><th align="left">Eugene Ware</th><td><a href="https://github.com/eugeneware">GitHub/eugeneware</a></td></tr>
 <tr><th align="left">Michael Kelly</th><td><a href="https://github.com/mrkelly">GitHub/mrkelly</a></td></tr>
 <tr><th align="left">Peter Liljenberg</th><td><a href="https://github.com/petli">GitHub/petli</a></td></tr>
-<tr><th align="left">Flandre Scarlet</th><td><a href="https://github.com/XadillaX">GitHub/XadillaX</a></td></tr>
+<tr><th align="left">XadillaX</th><td><a href="https://github.com/XadillaX">GitHub/XadillaX</a></td></tr>
 <tr><th align="left">strandedcity</th><td><a href="https://github.com/strandedcity">GitHub/strandedcity</a></td></tr>
 <tr><th align="left">wmossman</th><td><a href="https://github.com/wmossman">GitHub/wmossman</a></td></tr>
 <tr><th align="left">Patrick Hulce</th><td><a href="https://github.com/patrickhulce">GitHub/patrickhulce</a></td></tr>
