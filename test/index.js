@@ -29,6 +29,14 @@ it('should be able to decode a JPEG', function(t) {
   t.end();
 });
 
+it('should be able to decode a JPEG with fill bytes', function(t) {
+  var jpegData = fixture('fillbytes.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  t.equal(rawImageData.width, 704);
+  t.equal(rawImageData.height, 576);
+  t.end();
+});
+
 it('should be able to decode a JPEG with RST intervals', function(t) {
   var jpegData = fixture('redbox-with-rst.jpg');
   var rawImageData = jpeg.decode(jpegData);
