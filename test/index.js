@@ -202,3 +202,14 @@ it('should be able to decode a JPEG from a typed array into a typed array', func
   t.assert(rawImageData.data instanceof Uint8Array, 'data is a typed array');
   t.end();
 });
+
+it('should be able to decode a JPEG with options', function(t) {
+  var jpegData = fixture('grumpycat.jpg');
+  var rawImageData = jpeg.decode(new Uint8Array(jpegData), { useTArray: true, colorTransform: false});
+  t.equal(rawImageData.width, 320);
+  t.equal(rawImageData.height, 180);
+  var expected = fixture('grumpycat-nocolortrans.rgba');
+  t.bufferEqual(rawImageData.data, expected);
+  t.assert(rawImageData.data instanceof Uint8Array, 'data is a typed array');
+  t.end();
+});
