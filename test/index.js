@@ -6,9 +6,17 @@ var redtape = require('redtape'),
 var it = redtape({
   asserts: {
     bufferEqual: function (a, b) {
-      if (a.length != b.length) return false;
+      if (a.length !== b.length) {
+        this.fail('buffers not equal, they have different length. Given length ' +
+                  a.length + ', expected length ' + b.length);
+        return false;
+      }
       for (var i = 0, len = a.length; i < len; i++) {
-        if (a[i] !== b[i]) return false;
+        if (a[i] !== b[i]) {
+          this.fail('buffers not equal at byte ' + i +
+                   ': Given ' + a[i] + ', expected ' + b[i]);
+          return false;
+        }
       }
       return true;
     }
