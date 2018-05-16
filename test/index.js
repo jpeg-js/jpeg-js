@@ -6,9 +6,17 @@ var redtape = require('redtape'),
 var it = redtape({
   asserts: {
     bufferEqual: function (a, b) {
-      if (a.length != b.length) return false;
+      if (a.length !== b.length) {
+        this.fail('buffers not equal, they have different length. Given length ' +
+                  a.length + ', expected length ' + b.length);
+        return false;
+      }
       for (var i = 0, len = a.length; i < len; i++) {
-        if (a[i] !== b[i]) return false;
+        if (a[i] !== b[i]) {
+          this.fail('buffers not equal at byte ' + i +
+                   ': Given ' + a[i] + ', expected ' + b[i]);
+          return false;
+        }
       }
       return true;
     }
@@ -190,6 +198,17 @@ it('should be able to decode a JPEG from a typed array into a typed array', func
   t.equal(rawImageData.width, 320);
   t.equal(rawImageData.height, 180);
   var expected = fixture('grumpycat.rgba');
+  t.bufferEqual(rawImageData.data, expected);
+  t.assert(rawImageData.data instanceof Uint8Array, 'data is a typed array');
+  t.end();
+});
+
+it('should be able to decode a JPEG with options', function(t) {
+  var jpegData = fixture('grumpycat.jpg');
+  var rawImageData = jpeg.decode(new Uint8Array(jpegData), { useTArray: true, colorTransform: false});
+  t.equal(rawImageData.width, 320);
+  t.equal(rawImageData.height, 180);
+  var expected = fixture('grumpycat-nocolortrans.rgba');
   t.bufferEqual(rawImageData.data, expected);
   t.assert(rawImageData.data instanceof Uint8Array, 'data is a typed array');
   t.end();
