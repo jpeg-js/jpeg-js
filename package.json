@@ -27,7 +27,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^12.6.9",
     "redtape": "~0.1.0",
     "tape": "~2.3.2"
   }
