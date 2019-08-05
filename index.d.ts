@@ -1,16 +1,16 @@
-interface ImageDataLike<T> {
+export interface RawImageData<T> {
   width: number,
   height: number,
   data: T
 }
 
-type BufferRet = ImageDataLike<Buffer>;
-type UintArrRet = ImageDataLike<Uint8Array>;
+type BufferRet = RawImageData<Buffer>;
+type UintArrRet = RawImageData<Uint8Array>;
 
 type ImageData = BufferRet | UintArrRet;
-type BufferLike = Buffer | Uint8Array | number[];
+type BufferLike = Buffer | Uint8Array | ArrayLike<number> | Iterable<number> | ArrayBuffer;
 
-export declare function encode(imgData: ImageDataLike<BufferLike>, quality?: number): BufferRet;
+export declare function encode(imgData: RawImageData<BufferLike>, quality?: number): BufferRet;
 
 /**
  * @deprecated - decode takes an object since 0.3.5
