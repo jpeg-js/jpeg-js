@@ -10,7 +10,7 @@ type UintArrRet = ImageDataLike<Uint8Array>;
 type ImageData = BufferRet | UintArrRet;
 type BufferLike = Buffer | Uint8Array | number[];
 
-export declare function encode(imgData: ImageDataLike<BufferLike>, qu: number): BufferRet;
+export declare function encode(imgData: ImageDataLike<BufferLike>, quality?: number): BufferRet;
 
 /**
  * @deprecated - decode takes an object since 0.3.5
