@@ -29,5 +29,8 @@
   "devDependencies": {
     "redtape": "~0.1.0",
     "tape": "~2.3.2"
+  },
+  "resolutions": {
+    "defined": "1.0.0"
   }
 }
