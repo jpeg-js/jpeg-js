@@ -213,3 +213,19 @@ it('should be able to decode a JPEG with options', function(t) {
   t.assert(rawImageData.data instanceof Uint8Array, 'data is a typed array');
   t.end();
 });
+
+// See https://github.com/eugeneware/jpeg-js/issues/53
+it('should not infinite loop', function(t) {
+  try {
+    jpeg.decode(
+      Buffer.from(
+        'ffd8ffc09dfdb0ffff0e5296bd7fbbc4f9579096bd7fbbfc0e80d50000ffff36fa400100236701bf73ffaf8003a57f097f5e000000008023c4f9579096bd7fbb008000001500b34e8c018fda5212',
+        'hex'
+      ), {useConservativeMemoryLimits: true}
+    );
+  } catch (err) {
+    t.assert(err, 'threw an error on invalid input');
+  }
+
+  t.end();
+})
