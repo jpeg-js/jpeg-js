@@ -20,9 +20,11 @@ export declare function decode(jpegData: BufferLike, opts?: false): BufferRet;
 
 export declare function decode(jpegData: BufferLike, opts: {
   useTArray: true,
-  colorTransform?: boolean
+  colorTransform?: boolean,
+  tolerantDecoding?: boolean
 }): UintArrRet;
 export declare function decode(jpegData: BufferLike, opts?: {
   useTArray?: false,
-  colorTransform?: boolean
+  colorTransform?: boolean,
+  tolerantDecoding?: boolean
 }): BufferRet;
