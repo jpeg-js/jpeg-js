@@ -216,7 +216,7 @@ it('should be able to decode a JPEG with options', function(t) {
 
 it('should be able to decode a JPEG into RGB', function(t) {
   var jpegData = fixture('grumpycat.jpg');
-  var rawImageData = jpeg.decode(new Uint8Array(jpegData), { useTArray: true, formatAsRGBA: true });
+  var rawImageData = jpeg.decode(new Uint8Array(jpegData), { useTArray: true, formatAsRGBA: false });
   t.equal(rawImageData.width, 320);
   t.equal(rawImageData.height, 180);
   var expected = fixture('grumpycat.rgb');
