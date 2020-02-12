@@ -74,6 +74,16 @@ it('should be able to decode a CMYK jpeg with correct colors', function (t) {
   t.end();
 });
 
+it('should be able to decode a CMYK jpeg with correct colors without transform', function (t) {
+  var jpegData = fixture('tree-cmyk-notransform.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  t.equal(rawImageData.width, 400);
+  t.equal(rawImageData.height, 250);
+  var expected = fixture('tree-cmyk-notransform.cmyk');
+  t.deepEqual(rawImageData.data, expected);
+  t.end();
+});
+
 it('should be able to decode an RGB jpeg with correct colors', function (t) {
   var jpegData = fixture('tree-rgb.jpg');
   var rawImageData = jpeg.decode(jpegData);
