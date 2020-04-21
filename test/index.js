@@ -54,6 +54,15 @@ it('should be able to decode a JPEG with RST intervals', function(t) {
   t.end();
 });
 
+it('should be able to decode a JPEG with trailing bytes', function(t) {
+  var jpegData = fixture('redbox-with-trailing-bytes.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  var expected = fixture('redbox.jpg');
+  var rawExpectedImageData = jpeg.decode(expected);
+  t.deepEqual(rawImageData.data, rawExpectedImageData.data);
+  t.end();
+});
+
 it('should be able to decode a grayscale JPEG', function(t) {
   var jpegData = fixture('apsara.jpg');
   var rawImageData = jpeg.decode(jpegData);
