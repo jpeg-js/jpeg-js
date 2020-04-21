@@ -167,7 +167,7 @@ it('should be able to create a JPEG from an array', function () {
 
 it('should be able to decode a JPEG into a typed array', function () {
   var jpegData = fixture('grumpycat.jpg');
-  var rawImageData = jpeg.decode(jpegData, true);
+  var rawImageData = jpeg.decode(jpegData, {useTArray: true});
   expect(rawImageData.width).toEqual(320);
   expect(rawImageData.height).toEqual(180);
   var expected = fixture('grumpycat.rgba');
@@ -177,7 +177,7 @@ it('should be able to decode a JPEG into a typed array', function () {
 
 it('should be able to decode a JPEG from a typed array into a typed array', function () {
   var jpegData = fixture('grumpycat.jpg');
-  var rawImageData = jpeg.decode(new Uint8Array(jpegData), true);
+  var rawImageData = jpeg.decode(new Uint8Array(jpegData), {useTArray: true});
   expect(rawImageData.width).toEqual(320);
   expect(rawImageData.height).toEqual(180);
   var expected = fixture('grumpycat.rgba');
