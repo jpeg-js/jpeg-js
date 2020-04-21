@@ -7,6 +7,11 @@ function fixture(name) {
   return fs.readFileSync(path.join(__dirname, 'fixtures', name));
 }
 
+const SUPER_LARGE_JPEG_BASE64 =
+  '/9j/wJ39sP//DlKWvX+7xPlXkJa9f7v8DoDVAAD//zb6QAEAI2cBv3P/r4ADpX8Jf14AAAAAgCPE+VeQlr1/uwCAAAAVALNOjAGP2lIS';
+
+const SUPER_LARGE_JPEG_BUFFER = Buffer.from(SUPER_LARGE_JPEG_BASE64, 'base64');
+
 it('should be able to decode a JPEG', function () {
   var jpegData = fixture('grumpycat.jpg');
   var rawImageData = jpeg.decode(jpegData);
@@ -216,3 +221,27 @@ it('should be able to encode/decode image with exif data', function () {
   var loopImageData = jpeg.decode(new Uint8Array(encodedData.data));
   expect(loopImageData.exifBuffer).toEqual(imageData.exifBuffer);
 });
+
+it('should be able to decode large images within memory limits', () => {
+  var jpegData = fixture('black-6000x6000.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  expect(rawImageData.width).toEqual(6000);
+  expect(rawImageData.height).toEqual(6000);
+}, 30000);
+
+// See https://github.com/eugeneware/jpeg-js/issues/53
+it('should limit resolution exposure', function () {
+  expect(() => jpeg.decode(SUPER_LARGE_JPEG_BUFFER)).toThrow(
+    'maxResolutionInMP limit exceeded by 141MP',
+  );
+});
+
+it('should limit memory exposure', function () {
+  expect(() => jpeg.decode(SUPER_LARGE_JPEG_BUFFER, {maxResolutionInMP: 500})).toThrow(
+    /maxMemoryUsageInMB limit exceeded by at least \d+MB/,
+  );
+
+  // Make sure the limit resets each decode.
+  var jpegData = fixture('grumpycat.jpg');
+  expect(() => jpeg.decode(jpegData)).not.toThrow();
+}, 30000);
