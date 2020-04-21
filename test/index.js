@@ -243,3 +243,13 @@ it('should be able to decode a JPEG into RGB', function(t) {
   t.assert(rawImageData.data instanceof Uint8Array, 'data is a typed array');
   t.end();
 });
+
+it('should be able to encode/decode image with exif data', function(t) {
+  var jpegData = fixture('grumpycat.jpg');
+  var imageData = jpeg.decode(new Uint8Array(jpegData));
+  t.assert(imageData.exifBuffer, 'decodes an exif buffer');
+  var encodedData = jpeg.encode(imageData);
+  var loopImageData = jpeg.decode(new Uint8Array(encodedData.data));
+  t.bufferEqual(loopImageData.exifBuffer, imageData.exifBuffer);
+  t.end();
+});
