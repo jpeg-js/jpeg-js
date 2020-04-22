@@ -2,13 +2,15 @@
 
 A pure javascript JPEG encoder and decoder for node.js
 
+**NOTE:** this is a _synchronous_ (i.e. CPU-blocking) library that is much slower than native alternatives. If you don't need a _pure javascript_ implementation, consider using async alternatives like [sharp](http://npmjs.com/package/sharp) in node or the [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) in the browser.
+
 [![build status](https://secure.travis-ci.org/eugeneware/jpeg-js.png)](http://travis-ci.org/eugeneware/jpeg-js)
 
 ## Installation
 
 This module is installed via npm:
 
-``` bash
+```bash
 $ npm install jpeg-js
 ```
 
@@ -18,7 +20,7 @@ $ npm install jpeg-js
 
 Will decode a buffer or typed array into a `Buffer`;
 
-``` js
+```js
 var jpeg = require('jpeg-js');
 var jpegData = fs.readFileSync('grumpycat.jpg');
 var rawImageData = jpeg.decode(jpegData);
@@ -30,13 +32,13 @@ console.log(rawImageData);
 */
 ```
 
-To decode directly into a `Uint8Array`, pass `true` as the second argument to
+To decode directly into a `Uint8Array`, pass `useTArray: true` in options
 `decode`:
 
-``` js
+```js
 var jpeg = require('jpeg-js');
 var jpegData = fs.readFileSync('grumpycat.jpg');
-var rawImageData = jpeg.decode(jpegData, true); // return as Uint8Array
+var rawImageData = jpeg.decode(jpegData, {useTArray: true}); // return as Uint8Array
 console.log(rawImageData);
 /*
 { width: 320,
@@ -45,23 +47,35 @@ console.log(rawImageData);
 */
 ```
 
+#### Decode Options
+
+| Option               | Description                                                                                                                                                                                       | Default     |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `colorTransform`     | Transform alternate colorspaces like YCbCr. `undefined` means respect the default behavior encoded in metadata.                                                                                   | `undefined` |
+| `useTArray`          | Decode pixels into a typed `Uint8Array` instead of a `Buffer`.                                                                                                                                    | `false`     |
+| `formatAsRGBA`       | Decode pixels into RGBA vs. RGB.                                                                                                                                                                  | `true`      |
+| `tolerantDecoding`   | Be more tolerant when encountering technically invalid JPEGs.                                                                                                                                     | `true`      |
+| `maxResolutionInMP`  | The maximum resolution image that `jpeg-js` should attempt to decode in megapixels. Images larger than this resolution will throw an error instead of decoding.                                   | `100`       |
+| `maxMemoryUsageInMB` | The (approximate) maximum memory that `jpeg-js` should allocate while attempting to decode the image in mebibyte. Images requiring more memory than this will throw an error instead of decoding. | `512`       |
+
 ### Encoding JPEGs
 
-``` js
+```js
 var jpeg = require('jpeg-js');
-var width = 320, height = 180;
+var width = 320,
+  height = 180;
 var frameData = new Buffer(width * height * 4);
 var i = 0;
 while (i < frameData.length) {
-  frameData[i++] = 0xFF; // red
+  frameData[i++] = 0xff; // red
   frameData[i++] = 0x00; // green
   frameData[i++] = 0x00; // blue
-  frameData[i++] = 0xFF; // alpha - ignored in JPEGs
+  frameData[i++] = 0xff; // alpha - ignored in JPEGs
 }
 var rawImageData = {
   data: frameData,
   width: width,
-  height: height
+  height: height,
 };
 var jpegImageData = jpeg.encode(rawImageData, 50);
 console.log(jpegImageData);
@@ -71,7 +85,7 @@ console.log(jpegImageData);
   data: <Buffer 5b 40 29 ff 59 3e 29 ff 54 3c 26 ff 55 3a 27 ff 5a 3e 2f ff 5c 3c 31 ff 58 35 2d ff 5b 36 2f ff 55 35 32 ff 5a 3a 37 ff 54 36 32 ff 4b 32 2c ff 4b 36 ... > }
 */
 // write to file
-fs.writeFileSync("image.jpg", jpegImageData.data);
+fs.writeFileSync('image.jpg', jpegImageData.data);
 ```
 
 ## License
@@ -109,25 +123,25 @@ The Adobe License for the encoder is:
 Copyright (c) 2008, Adobe Systems Incorporated
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without 
+Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
 met:
 
-* Redistributions of source code must retain the above copyright notice, 
+- Redistributions of source code must retain the above copyright notice,
   this list of conditions and the following disclaimer.
 
-* Redistributions in binary form must reproduce the above copyright
-  notice, this list of conditions and the following disclaimer in the 
+- Redistributions in binary form must reproduce the above copyright
+  notice, this list of conditions and the following disclaimer in the
   documentation and/or other materials provided with the distribution.
 
-* Neither the name of Adobe Systems Incorporated nor the names of its 
-  contributors may be used to endorse or promote products derived from 
+- Neither the name of Adobe Systems Incorporated nor the names of its
+  contributors may be used to endorse or promote products derived from
   this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
 IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
 THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
 CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
 EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
 PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
