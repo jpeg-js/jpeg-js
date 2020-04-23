@@ -1,7 +1,7 @@
 export interface RawImageData<T> {
-  width: number,
-  height: number,
-  data: T
+  width: number;
+  height: number;
+  data: T;
 }
 
 type BufferRet = RawImageData<Buffer>;
@@ -12,19 +12,25 @@ type BufferLike = Buffer | Uint8Array | ArrayLike<number> | Iterable<number> | A
 
 export declare function encode(imgData: RawImageData<BufferLike>, quality?: number): BufferRet;
 
-/**
- * @deprecated - decode takes an object since 0.3.5
- */
-export declare function decode(jpegData: BufferLike, opts: true): UintArrRet;
-export declare function decode(jpegData: BufferLike, opts?: false): BufferRet;
-
-export declare function decode(jpegData: BufferLike, opts: {
-  useTArray: true,
-  colorTransform?: boolean,
-  tolerantDecoding?: boolean
-}): UintArrRet;
-export declare function decode(jpegData: BufferLike, opts?: {
-  useTArray?: false,
-  colorTransform?: boolean,
-  tolerantDecoding?: boolean
-}): BufferRet;
+export declare function decode(
+  jpegData: BufferLike,
+  opts: {
+    useTArray: true;
+    colorTransform?: boolean;
+    formatAsRGBA?: boolean;
+    tolerantDecoding?: boolean;
+    maxResolutionInMP?: number;
+    maxMemoryUsageInMB?: number;
+  },
+): UintArrRet;
+export declare function decode(
+  jpegData: BufferLike,
+  opts?: {
+    useTArray?: false;
+    colorTransform?: boolean;
+    formatAsRGBA?: boolean;
+    tolerantDecoding?: boolean;
+    maxResolutionInMP?: number;
+    maxMemoryUsageInMB?: number;
+  },
+): BufferRet;
