@@ -49,6 +49,7 @@ it('should be able to decode a grayscale JPEG', function () {
   var rawImageData = jpeg.decode(jpegData);
   expect(rawImageData.width).toEqual(580);
   expect(rawImageData.height).toEqual(599);
+  expect(rawImageData.comments).toEqual(['File source: http://commons.wikimedia.org/wiki/File:Apsara-mit-Sitar.jpg']);
   var expected = fixture('apsara.rgba');
   expect(rawImageData.data).toEqual(expected);
 });
