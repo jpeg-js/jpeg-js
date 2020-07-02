@@ -22,7 +22,7 @@ export declare function decode(
     maxResolutionInMP?: number;
     maxMemoryUsageInMB?: number;
   },
-): UintArrRet;
+): UintArrRet & {comment?: string};
 export declare function decode(
   jpegData: BufferLike,
   opts?: {
@@ -33,4 +33,4 @@ export declare function decode(
     maxResolutionInMP?: number;
     maxMemoryUsageInMB?: number;
   },
-): BufferRet;
+): BufferRet & {comment?: string};
