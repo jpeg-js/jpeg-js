@@ -223,6 +223,13 @@ it('should be able to encode/decode image with exif data', function () {
   expect(loopImageData.exifBuffer).toEqual(imageData.exifBuffer);
 });
 
+it('should be to decode image with ffdc marker', function () {
+  var jpegData = fixture('marker-ffdc.jpg');
+  var imageData = jpeg.decode(new Uint8Array(jpegData));
+  expect(imageData.numberOfLines).toEqual(imageData.height);
+});
+
+
 it('should be able to decode large images within memory limits', () => {
   var jpegData = fixture('black-6000x6000.jpg');
   var rawImageData = jpeg.decode(jpegData);
