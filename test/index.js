@@ -12,6 +12,14 @@ const SUPER_LARGE_JPEG_BASE64 =
 
 const SUPER_LARGE_JPEG_BUFFER = Buffer.from(SUPER_LARGE_JPEG_BASE64, 'base64');
 
+it('should be able read image with a bad e1 marker not preceeded by ff', function () {
+    var jpegData = fixture('table-with-bad-e1.jpg');
+    var rawImageData = jpeg.decode(jpegData);
+    var expected = fixture('table-with-good-e1.jpg');
+    var rawExpectedImageData = jpeg.decode(expected);
+    expect(rawImageData.data).toEqual(rawExpectedImageData.data);
+});
+
 it('should be able to decode a JPEG', function () {
   var jpegData = fixture('grumpycat.jpg');
   var rawImageData = jpeg.decode(jpegData);
