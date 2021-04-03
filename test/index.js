@@ -179,6 +179,31 @@ it('should be able to create a JPEG from an array', function () {
   expect(jpegImageData.data).toEqual(expected);
 });
 
+it('should be able to create a JPEG from an array with comment', function () {
+  var width = 320,
+    height = 180;
+  var comments = ["First comment", "Second comment"];
+  var frameData = new Buffer(width * height * 4);
+  var i = 0;
+  while (i < frameData.length) {
+    frameData[i++] = 0xff; // red
+    frameData[i++] = 0x00; // green
+    frameData[i++] = 0x00; // blue
+    frameData[i++] = 0xff; // alpha - ignored in JPEGs
+  }
+  var rawImageData = {
+    data: frameData,
+    width: width,
+    height: height,
+    comments: comments,
+  };
+  var jpegImageData = jpeg.encode(rawImageData, 50); 
+  expect(jpegImageData.width).toEqual(width);
+  expect(jpegImageData.height).toEqual(height);
+  var expected = fixture('redbox_comment.jpg');
+  expect(jpegImageData.data).toEqual(expected);
+});
+
 it('should be able to decode a JPEG into a typed array', function () {
   var jpegData = fixture('grumpycat.jpg');
   var rawImageData = jpeg.decode(jpegData, {useTArray: true});
