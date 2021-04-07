@@ -202,6 +202,7 @@ it('should be able to create a JPEG from an array with comment', function () {
   expect(jpegImageData.height).toEqual(height);
   var expected = fixture('redbox_comment.jpg');
   expect(jpegImageData.data).toEqual(expected);
+  expect(jpeg.decode(jpegImageData.data).comments).toEqual(['First comment', 'second comment']);
 });
 
 it('should be able to decode a JPEG into a typed array', function () {
