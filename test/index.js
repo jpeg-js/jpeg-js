@@ -7,10 +7,12 @@ function fixture(name) {
   return fs.readFileSync(path.join(__dirname, 'fixtures', name));
 }
 
-const SUPER_LARGE_JPEG_BASE64 =
-  '/9j/wJ39sP//DlKWvX+7xPlXkJa9f7v8DoDVAAD//zb6QAEAI2cBv3P/r4ADpX8Jf14AAAAAgCPE+VeQlr1/uwCAAAAVALNOjAGP2lIS';
+const SUPER_LARGE_JPEG_BASE64 = '/9j/wfFRBf//BdgC/9p/2P/E4d4=';
+
+const SUPER_LARGE_RESOLUTION_JPEG_BASE64 = '/9j/wfFR2PDh3g==';
 
 const SUPER_LARGE_JPEG_BUFFER = Buffer.from(SUPER_LARGE_JPEG_BASE64, 'base64');
+const SUPER_LARGE_RESOLUTION_JPEG_BUFFER = Buffer.from(SUPER_LARGE_RESOLUTION_JPEG_BASE64, 'base64');
 
 it('should be able read image with a bad e1 marker not preceeded by ff', function () {
     var jpegData = fixture('table-with-bad-e1.jpg');
@@ -274,8 +276,8 @@ it('should be able to decode large images within memory limits', () => {
 
 // See https://github.com/eugeneware/jpeg-js/issues/53
 it('should limit resolution exposure', function () {
-  expect(() => jpeg.decode(SUPER_LARGE_JPEG_BUFFER)).toThrow(
-    'maxResolutionInMP limit exceeded by 141MP',
+  expect(() => jpeg.decode(SUPER_LARGE_RESOLUTION_JPEG_BUFFER)).toThrow(
+    'maxResolutionInMP limit exceeded by 3405MP',
   );
 });
 
@@ -288,3 +290,9 @@ it('should limit memory exposure', function () {
   var jpegData = fixture('grumpycat.jpg');
   expect(() => jpeg.decode(jpegData)).not.toThrow();
 }, 30000);
+
+// See https://github.com/jpeg-js/jpeg-js/issues/105
+it('invalid sampling factor should error out', function () {
+  expect(() => jpeg.decode(Buffer.from('/9j/wfFR2AD/UdgA/9r/3g==', 'base64')).toThrow(
+    'Invalid sampling factor, expected values above 0'))
+});
