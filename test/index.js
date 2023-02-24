@@ -69,7 +69,7 @@ it('should be able to decode a CMYK jpeg with correct colors', function () {
   var rawImageData = jpeg.decode(jpegData);
   expect(rawImageData.width).toEqual(400);
   expect(rawImageData.height).toEqual(250);
-  var expected = fixture('tree-cmyk.cmyk');
+  var expected = fixture('tree-cmyk.rgba');
   expect(rawImageData.data).toEqual(expected);
 });
 
@@ -78,7 +78,7 @@ it('should be able to decode a CMYK jpeg with correct colors without transform',
   var rawImageData = jpeg.decode(jpegData);
   expect(rawImageData.width).toEqual(400);
   expect(rawImageData.height).toEqual(250);
-  var expected = fixture('tree-cmyk-notransform.cmyk');
+  var expected = fixture('tree-cmyk-notransform.rgba');
   expect(rawImageData.data).toEqual(expected);
 });
 
@@ -96,7 +96,7 @@ it('should be able to decode a greyscale CMYK jpeg with correct colors', functio
   var rawImageData = jpeg.decode(jpegData);
   expect(rawImageData.width).toEqual(300);
   expect(rawImageData.height).toEqual(389);
-  var expected = fixture('cmyk-grey.cmyk');
+  var expected = fixture('cmyk-grey.rgba');
   expect(rawImageData.data).toEqual(expected);
 });
 
@@ -105,14 +105,14 @@ it('should be able to decode an adobe CMYK jpeg with correct colors', function (
   var rawImageData = jpeg.decode(jpegData);
   expect(rawImageData.width).toEqual(300);
   expect(rawImageData.height).toEqual(111);
-  var expected = fixture('cmyktest.cmyk');
+  var expected = fixture('cmyktest.rgba');
   expect(rawImageData.data).toEqual(expected);
 
   var jpegData2 = fixture('plusshelf-drawing.jpg');
   var rawImageData2 = jpeg.decode(jpegData2);
   expect(rawImageData2.width).toEqual(350);
   expect(rawImageData2.height).toEqual(233);
-  var expected2 = fixture('plusshelf-drawing.cmyk');
+  var expected2 = fixture('plusshelf-drawing.rgba');
   expect(rawImageData2.data).toEqual(expected2);
 });
 
