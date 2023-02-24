@@ -91,6 +91,15 @@ it('should be able to decode an RGB jpeg with correct colors', function () {
   expect(rawImageData.data).toEqual(expected);
 });
 
+it('should be able to decode an progressive RGB jpeg with correct colors', function () {
+  var jpegData = fixture('rgb.jpg');
+  var rawImageData = jpeg.decode(jpegData);
+  expect(rawImageData.width).toEqual(350);
+  expect(rawImageData.height).toEqual(262);
+  var expected = fixture('rgb.rgba');
+  expect(rawImageData.data).toEqual(expected);
+});
+
 it('should be able to decode a greyscale CMYK jpeg with correct colors', function () {
   var jpegData = fixture('cmyk-grey.jpg');
   var rawImageData = jpeg.decode(jpegData);
