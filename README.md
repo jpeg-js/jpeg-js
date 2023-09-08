@@ -1,10 +1,10 @@
-# jpeg-js
+# jpeg-js ![CI status](https://github.com/jpeg-js/jpeg-js/actions/workflows/ci.yml/badge.svg)
 
 A pure javascript JPEG encoder and decoder for node.js
 
 **NOTE:** this is a _synchronous_ (i.e. CPU-blocking) library that is much slower than native alternatives. If you don't need a _pure javascript_ implementation, consider using async alternatives like [sharp](http://npmjs.com/package/sharp) in node or the [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) in the browser.
 
-[![build status](https://secure.travis-ci.org/eugeneware/jpeg-js.png)](http://travis-ci.org/eugeneware/jpeg-js)
+
 
 ## Installation
 
